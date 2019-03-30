@@ -8,4 +8,8 @@ class Family:
         self.children = []
 
     def add_daughter(self, daughter_name):
+        daughter = Person(daughter_name, 'Female')
+        self.children.append(daughter)
+    
+    def add_son(self, son_name):
         pass
