@@ -14,24 +14,22 @@ class TestFamilyTree(TestCase):
         assert familytree.root_person.gender == 'Male'
 
     def test_add_wife(self):
-        name = 'Evan'
+        person_name = 'Evan'
         gender = 'Male'
-        person = Person(name, gender)
-        familytree = FamilyTree(name, gender)
+        familytree = FamilyTree(person_name, gender)
         wife_name = 'Diana'
-        familytree.add_wife(person, wife_name)
+        familytree.add_wife(person_name, wife_name)
 
         assert familytree.list_of_families[0].husband.name == 'Evan'
         assert familytree.list_of_families[0].wife.name == 'Diana'
         assert familytree.list_of_families[0].children == []
     
     def test_add_husband(self):
-        name = 'Diana'
+        person_name = 'Diana'
         gender = 'Female'
-        person = Person(name, gender)
-        familytree = FamilyTree(name, gender)
-        wife_name = 'Evan'
-        familytree.add_husband(person, wife_name)
+        familytree = FamilyTree(person_name, gender)
+        husband_name = 'Evan'
+        familytree.add_husband(person_name, husband_name)
 
         assert familytree.list_of_families[0].husband.name == 'Evan'
         assert familytree.list_of_families[0].wife.name == 'Diana'
