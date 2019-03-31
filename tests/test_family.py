@@ -34,3 +34,17 @@ class TestFamily(TestCase):
 
         assert family.children[0].name == 'Alex'
         assert family.children[0].gender == 'Male'
+    
+    def test_get_brothers(self):
+        husband = Person('Evan', 'Male')
+        wife = Person('Diana', 'Female')
+        family = Family(husband, wife)
+        family.add_son('John')
+        family.add_son('Alex')
+        family.add_son('Joe')
+        family.add_daughter('Nisha')
+        list_of_brothers = family.get_brothers('Joe')
+        
+        assert 'Alex' in list_of_brothers
+        assert 'John' in list_of_brothers
+        assert 'Nisha' not in list_of_brothers
