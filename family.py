@@ -36,3 +36,9 @@ class Family:
                 list_of_sons.append(child.name)
         return list_of_sons
 
+    def get_daughters(self, parent_name):
+        list_of_daughters = []
+        for child in self.children:
+            if child.gender == 'Female':
+                list_of_daughters.append(child.name)
+        return list_of_daughters
