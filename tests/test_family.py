@@ -48,3 +48,16 @@ class TestFamily(TestCase):
         assert 'Alex' in list_of_brothers
         assert 'John' in list_of_brothers
         assert 'Nisha' not in list_of_brothers
+    
+    def test_get_sisters(self):
+        husband = Person('Evan', 'Male')
+        wife = Person('Diana', 'Female')
+        family = Family(husband, wife)
+        family.add_son('John')
+        family.add_son('Alex')
+        family.add_son('Joe')
+        family.add_daughter('Nisha')
+        list_of_sisters = family.get_sisters('Joe')
+
+        assert 'Nisha' in list_of_sisters
+        assert 'Alex' not in list_of_sisters

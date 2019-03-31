@@ -22,3 +22,9 @@ class Family:
                 list_of_brothers.append(child.name)
         return list_of_brothers
 
+    def get_sisters(self, name):
+        list_of_sisters = []
+        for child in self.children:
+            if child.name != name and child.gender == 'Female':
+                list_of_sisters.append(child.name)
+        return list_of_sisters
