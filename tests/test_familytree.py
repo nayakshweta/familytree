@@ -115,3 +115,24 @@ class TestFamilyTree(TestCase):
         aunts_list = familytree.get_aunts('Shaun')
 
         assert len(aunts_list) == 2
+    
+    def test_get_uncles(self):
+        familytree = FamilyTree('Evan', 'Male')
+        familytree.add_wife('Evan', 'Diana')
+        EvanDianasfamily = familytree.find_family_with_parent_name('Diana')
+        EvanDianasfamily.add_daughter('Nisha')
+        EvanDianasfamily.add_son('John')
+        EvanDianasfamily.add_son('Joe')
+        EvanDianasfamily.add_son('Alex')
+        familytree.add_wife('Alex', 'Nancy')
+        familytree.add_wife('Joe', 'Niki')
+        familytree.add_husband('Nisha', 'Adam')
+        AlexNancysfamily = familytree.find_family_with_parent_name('Alex')
+        AlexNancysfamily.add_son('Jacob')
+        AlexNancysfamily.add_son('Shaun')
+        JoeNikisfamily = familytree.find_family_with_parent_name('Niki')
+        JoeNikisfamily.add_son('Piers')
+        JoeNikisfamily.add_daughter('Sally')
+        uncles_list = familytree.get_uncles('Shaun')
+
+        assert len(uncles_list) == 3

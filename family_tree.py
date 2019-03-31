@@ -66,7 +66,7 @@ class FamilyTree:
         try:
             mothers_family = self.find_family_with_child_name(mothers_name)
             mothers_sisters = mothers_family.get_sisters(mothers_name)
-            mothers_brothers = mothers_family.get_brothers()
+            mothers_brothers = mothers_family.get_brothers(mothers_name)
             mothers_sisters_in_law = []
             for brother in mothers_brothers:
                 mothers_sister_in_law = self.get_spouse(brother)
@@ -94,3 +94,43 @@ class FamilyTree:
         aunts_list = mothers_sisters + mothers_sisters_in_law + fathers_sisters + fathers_sisters_in_law
         return aunts_list
 
+
+    def get_uncles(self, name):
+        immediate_family = self.find_family_with_child_name(name)
+        mothers_name = immediate_family.wife.name
+        fathers_name = immediate_family.husband.name
+        mothers_brothers = []
+        mothers_brothers_in_law = []
+        fathers_brothers = []
+        fathers_brothers_in_law = []
+
+        try:
+            mothers_family = self.find_family_with_child_name(mothers_name)
+            mothers_sisters = mothers_family.get_sisters(mothers_name)
+            mothers_brothers = mothers_family.get_brothers(mothers_name)
+            mothers_brothers_in_law = []
+            for sister in mothers_sisters:
+                mothers_brother_in_law = self.get_spouse(sister)
+                if mothers_brother_in_law == None:
+                    pass
+                else:
+                    mothers_brothers_in_law.append(mothers_brother_in_law)
+        except:
+            pass
+
+        try:
+            fathers_family = self.find_family_with_child_name(fathers_name)
+            fathers_sisters = fathers_family.get_sisters(fathers_name)
+            fathers_brothers = fathers_family.get_brothers(fathers_name)
+            fathers_brothers_in_law = []
+            for sister in fathers_sisters:
+                fathers_brother_in_law = self.get_spouse(sister)
+                if fathers_brother_in_law == None:
+                    pass
+                else:
+                    fathers_brothers_in_law.append(fathers_brother_in_law)
+        except:
+            pass
+
+        uncles_list = mothers_brothers + mothers_brothers_in_law + fathers_brothers + fathers_brothers_in_law
+        return uncles_list
