@@ -60,3 +60,16 @@ class TestFamilyTree(TestCase):
         family = familytree.find_family_with_child_name('Joe')
 
         assert len(family.children) == 2
+
+    def test_family_with_parent_name(self):
+        person_name = 'Evan'
+        gender = 'Male'
+        familytree = FamilyTree(person_name, gender)
+        familytree.add_wife('Evan', 'Diana')
+        familytree.list_of_families[0].add_daughter('Nisha')
+        familytree.add_husband('Nisha', 'Adam')
+        familytree.list_of_families[0].add_son('Joe')
+        familytree.add_wife('Joe', 'Niki')
+        family = familytree.find_family_with_parent_name('Joe')
+
+        assert family.children == []

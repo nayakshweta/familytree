@@ -22,7 +22,6 @@ class FamilyTree:
                             person = child
         return person
 
-
     def add_wife(self, person_name, wife_name):
         person = self.find_person(person_name)
         wife = Person(wife_name, 'Female')
@@ -35,9 +34,14 @@ class FamilyTree:
         family = Family(husband, person)
         self.list_of_families.append(family)
 
+
     def find_family_with_child_name(self, name):
         for family in self.list_of_families:
             for child in family.children:
                 if child.name == name:
                     return family
 
+    def find_family_with_parent_name(self, name):
+        for family in self.list_of_families:
+            if family.husband.name == name or family.wife.name == name:
+                return family
