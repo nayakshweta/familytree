@@ -178,3 +178,24 @@ class FamilyTree:
         
         return grandfathers
     
+    def get_grandmothers(self, name):
+        immediate_family = self.find_family_with_child_name(name)
+        mothers_name = immediate_family.wife.name
+        fathers_name = immediate_family.husband.name
+        grandmothers = []
+
+        try:
+            mothers_family = self.find_family_with_child_name(mothers_name)
+            grandmother = mothers_family.wife.name
+            grandmothers.append(grandmother)
+        except:
+            pass
+
+        try:
+            fathers_family = self.find_family_with_child_name(fathers_name)
+            grandmother = fathers_family.wife.name
+            grandmothers.append(grandmother)
+        except:
+            pass
+        
+        return grandmothers
