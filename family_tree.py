@@ -154,3 +154,27 @@ class FamilyTree:
                 pass
         
         return cousins
+
+    
+    def get_grandfathers(self, name):
+        immediate_family = self.find_family_with_child_name(name)
+        mothers_name = immediate_family.wife.name
+        fathers_name = immediate_family.husband.name
+        grandfathers = []
+
+        try:
+            mothers_family = self.find_family_with_child_name(mothers_name)
+            grandfather = mothers_family.husband.name
+            grandfathers.append(grandfather)
+        except:
+            pass
+
+        try:
+            fathers_family = self.find_family_with_child_name(fathers_name)
+            grandfather = fathers_family.husband.name
+            grandfathers.append(grandfather)
+        except:
+            pass
+        
+        return grandfathers
+    
