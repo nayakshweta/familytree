@@ -45,3 +45,52 @@ class FamilyTree:
         for family in self.list_of_families:
             if family.husband.name == name or family.wife.name == name:
                 return family
+
+    def get_spouse(self, name):
+        for family in self.list_of_families:
+            if family.husband.name == name:
+                return family.wife.name
+            elif family.wife.name == name:
+                return family.husband.name
+
+
+    def get_aunts(self, name):
+        immediate_family = self.find_family_with_child_name(name)
+        mothers_name = immediate_family.wife.name
+        fathers_name = immediate_family.husband.name
+        mothers_sisters = []
+        mothers_sisters_in_law = []
+        fathers_sisters = []
+        fathers_sisters_in_law = []
+
+        try:
+            mothers_family = self.find_family_with_child_name(mothers_name)
+            mothers_sisters = mothers_family.get_sisters(mothers_name)
+            mothers_brothers = mothers_family.get_brothers()
+            mothers_sisters_in_law = []
+            for brother in mothers_brothers:
+                mothers_sister_in_law = self.get_spouse(brother)
+                if mothers_sister_in_law == None:
+                    pass
+                else:
+                    mothers_sisters_in_law.append(mothers_sister_in_law)
+        except:
+            pass
+
+        try:
+            fathers_family = self.find_family_with_child_name(fathers_name)
+            fathers_sisters = fathers_family.get_sisters(fathers_name)
+            fathers_brothers = fathers_family.get_brothers(fathers_name)
+            fathers_sisters_in_law = []
+            for brother in fathers_brothers:
+                fathers_sister_in_law = self.get_spouse(brother)
+                if fathers_sister_in_law == None:
+                    pass
+                else:
+                    fathers_sisters_in_law.append(fathers_sister_in_law)
+        except:
+            pass
+
+        aunts_list = mothers_sisters + mothers_sisters_in_law + fathers_sisters + fathers_sisters_in_law
+        return aunts_list
+
