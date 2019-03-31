@@ -28,3 +28,11 @@ class Family:
             if child.name != name and child.gender == 'Female':
                 list_of_sisters.append(child.name)
         return list_of_sisters
+    
+    def get_sons(self, parent_name):
+        list_of_sons = []
+        for child in self.children:
+            if child.gender == 'Male':
+                list_of_sons.append(child.name)
+        return list_of_sons
+
