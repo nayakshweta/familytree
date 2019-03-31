@@ -134,3 +134,23 @@ class FamilyTree:
 
         uncles_list = mothers_brothers + mothers_brothers_in_law + fathers_brothers + fathers_brothers_in_law
         return uncles_list
+
+
+    def get_cousins(self, name):
+        aunts_list = self.get_aunts(name)
+        uncles_list = self.get_uncles(name)
+        aunts_and_uncles_list = aunts_list + uncles_list
+        cousins = []
+
+        for auntoruncle in aunts_and_uncles_list:
+            try:
+                auntoruncle_family = self.find_family_with_parent_name(auntoruncle)
+                for child in auntoruncle_family.children:
+                    if child.name in cousins:
+                        pass
+                    else:
+                        cousins.append(child.name)
+            except:
+                pass
+        
+        return cousins
