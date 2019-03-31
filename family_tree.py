@@ -7,9 +7,25 @@ class FamilyTree:
         self.root_person = Person(name, gender)
         self.list_of_families = []
 
+    def find_person(self, name):
+        if self.root_person.name == name:
+            person = self.root_person
+        else:
+            for family in self.list_of_families:
+                if (family.husband.name == self.root_person.name) and (family.husband.name == name):
+                    person = family.husband
+                elif (family.wife.name == self.root_person.name) and (family.wife.name == name):
+                    person = family.wife
+                else:
+                    for child in family.children:
+                        if child.name == name:
+                            person = child
+        return person
+
+
     def add_wife(self, person_name, wife_name):
         person = self.find_person(person_name)
-        wife = Person(wife_name , 'Female')
+        wife = Person(wife_name, 'Female')
         family = Family(person, wife)
         self.list_of_families.append(family)
 
@@ -19,18 +35,9 @@ class FamilyTree:
         family = Family(husband, person)
         self.list_of_families.append(family)
 
-    def find_person(self, name):
-        if self.root_person.name == name:
-            return self.root_person
-        else:
-            for family in self.list_of_families:
-                if family.husband.name == self.root_person.name or family.wife.name == self.root_person.name:
-                    if family.husband.name == name:
-                        return family.husband
-                    elif family.wife.name == name:
-                        return family.wife
-                else:
-                    list_of_children = family.children
-                    for child in list_of_children:
-                        if child.name == name:
-                            return child
+
+    def find_family_with_child_name(self, name):
+        for family in self.list_of_families:
+            for child in family.children:
+                if child.name == name:
+                    return family
