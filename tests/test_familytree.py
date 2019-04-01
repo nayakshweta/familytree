@@ -203,3 +203,25 @@ class TestFamilyTree(TestCase):
 
         assert 'Diana' in grandmothers
         assert len(grandmothers) == 1
+
+    def test_get_grandson(self):
+        familytree = FamilyTree('Evan', 'Male')
+        familytree.add_wife('Evan', 'Diana')
+        EvanDianasfamily = familytree.find_family_with_parent_name('Diana')
+        EvanDianasfamily.add_daughter('Nisha')
+        EvanDianasfamily.add_son('John')
+        EvanDianasfamily.add_son('Joe')
+        EvanDianasfamily.add_son('Alex')
+        familytree.add_wife('Alex', 'Nancy')
+        familytree.add_wife('Joe', 'Niki')
+        familytree.add_husband('Nisha', 'Adam')
+        AlexNancysfamily = familytree.find_family_with_parent_name('Alex')
+        AlexNancysfamily.add_son('Jacob')
+        AlexNancysfamily.add_son('Shaun')
+        JoeNikisfamily = familytree.find_family_with_parent_name('Niki')
+        JoeNikisfamily.add_son('Piers')
+        JoeNikisfamily.add_daughter('Sally')
+        grandsons = familytree.get_grandsons('Evan')
+
+        assert len(grandsons) == 3
+        assert 'Piers' in grandsons

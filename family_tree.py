@@ -199,3 +199,17 @@ class FamilyTree:
             pass
         
         return grandmothers
+
+    def get_grandsons(self, name):
+        grandsons = []
+        family = self.find_family_with_parent_name(name)
+        for child in family.children:
+            try:
+                childs_family = self.find_family_with_parent_name(child.name)
+                for grandchild in childs_family.children:
+                    if grandchild.gender == 'Male':
+                        grandsons.append(grandchild.name)
+            except:
+                pass
+        return grandsons
+
