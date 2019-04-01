@@ -42,3 +42,4 @@ class Family:
             if child.gender == 'Female':
                 list_of_daughters.append(child.name)
         return list_of_daughters
+
