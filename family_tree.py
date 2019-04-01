@@ -213,3 +213,15 @@ class FamilyTree:
                 pass
         return grandsons
 
+    def get_granddaughters(self, name):
+        granddaughters = []
+        family = self.find_family_with_parent_name(name)
+        for child in family.children:
+            try:
+                childs_family = self.find_family_with_parent_name(child.name)
+                for grandchild in childs_family.children:
+                    if grandchild.gender == 'Female':
+                        granddaughters.append(grandchild.name)
+            except:
+                pass
+        return granddaughters
